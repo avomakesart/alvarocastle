@@ -1,0 +1,11 @@
+query Contact($id: Int!) {
+  contact(id: $id) {
+    id
+    fullname
+    subject
+    phone
+    message
+    createdAt
+    updatedAt
+  }
+}

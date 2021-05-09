@@ -1,0 +1,11 @@
+query Experience($id: Int!) {
+  experience(id: $id) {
+    id
+    company
+    position
+    period
+    description
+    createdAt
+    updatedAt
+  }
+}

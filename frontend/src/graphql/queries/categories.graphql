@@ -1,0 +1,11 @@
+query Categories($limit: Int!, $cursor: String) {
+  categories(limit: $limit, cursor: $cursor) {
+    categories {
+      id
+      title
+      createdAt
+      updatedAt
+    }
+    hasMore
+  }
+}

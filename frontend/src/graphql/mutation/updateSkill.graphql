@@ -1,0 +1,9 @@
+mutation UpdateSkill($id: Int!, $input: SkillInput!) {
+  updateSkill(id: $id, input: $input) {
+    id
+    title
+    image
+    createdAt
+    updatedAt
+  }
+}

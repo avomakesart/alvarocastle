@@ -1,0 +1,20 @@
+mutation CreateProject($input: ProjectInput!) {
+  createProject(input: $input) {
+    id
+    title
+    featuredImage
+    description
+    voteStatus
+    points
+    category
+    creatorId
+    creator {
+      id
+      firstName
+      lastName
+      email
+    }
+    createdAt
+    updatedAt
+  }
+}

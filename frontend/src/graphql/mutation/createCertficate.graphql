@@ -1,0 +1,13 @@
+mutation CreateCertificate($input: CertificateInput!) {
+  createCertificate(input: $input) {
+    id
+    title
+    issuer
+    companyImg
+    date
+    certId
+    certUrl
+    createdAt
+    updatedAt
+  }
+}

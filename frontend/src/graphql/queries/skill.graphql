@@ -1,0 +1,10 @@
+query Skill($id: Int!) {
+  skill(id: $id) {
+    id
+    title
+    image
+    category
+    createdAt
+    updatedAt
+  }
+}

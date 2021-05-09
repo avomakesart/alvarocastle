@@ -1,0 +1,10 @@
+mutation CreateSkill($input: SkillInput!) {
+  createSkill(input: $input) {
+    id
+    title
+    image
+    category
+    createdAt
+    updatedAt
+  }
+}

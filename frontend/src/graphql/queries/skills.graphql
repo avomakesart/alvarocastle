@@ -1,0 +1,13 @@
+query Skills($limit: Int!, $cursor: String) {
+  skills(limit: $limit, cursor: $cursor) {
+    skills {
+      id
+      title
+      image
+      category
+      createdAt
+      updatedAt
+    }
+    hasMore
+  }
+}

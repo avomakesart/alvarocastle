@@ -1,0 +1,24 @@
+query Projects($limit: Int!, $cursor: String) {
+  projects(limit: $limit, cursor: $cursor) {
+    projects {
+      id
+      title
+      headline
+      description
+      featuredImage
+      points
+      voteStatus
+      category
+      creatorId
+      creator {
+        id
+        firstName
+        lastName
+        email
+      }
+      createdAt
+      updatedAt
+    }
+    hasMore
+  }
+}

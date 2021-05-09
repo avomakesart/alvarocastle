@@ -1,0 +1,10 @@
+mutation CreateExperience($input: ExperienceInput!) {
+  createExperience(input: $input) {
+    id
+    company
+    position
+    description
+    createdAt
+    updatedAt
+  }
+}

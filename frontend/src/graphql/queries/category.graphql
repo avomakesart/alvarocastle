@@ -1,0 +1,8 @@
+query Category($id: Int!) {
+  category(id: $id) {
+    id
+    title
+    createdAt
+    updatedAt
+  }
+}

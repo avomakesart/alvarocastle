@@ -1,0 +1,14 @@
+query Contacts($limit: Int!, $cursor: String) {
+  contacts(limit: $limit, cursor: $cursor) {
+    contact {
+      id
+      fullname
+      subject
+      phone
+      message
+      createdAt
+      updatedAt
+    }
+    hasMore
+  }
+}

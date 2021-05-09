@@ -1,0 +1,13 @@
+query Certificate($id: Int!) {
+  certificate(id: $id) {
+    id
+    title
+    issuer
+    companyImg
+    date
+    certId
+    certUrl
+    createdAt
+    updatedAt
+  }
+}

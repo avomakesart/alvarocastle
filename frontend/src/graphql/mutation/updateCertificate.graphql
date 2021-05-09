@@ -1,0 +1,28 @@
+mutation UpdateCertificate(
+  $id: Int!
+  $title: String!
+  $issuer: String!
+  $companyImg: String!
+  $date: String!
+  $certUrl: String!
+  $certId: String!
+) {
+  updateCertificate(
+    id: $id
+    title: $title
+    issuer: $issuer
+    companyImg: $companyImg
+    date: $date
+    certUrl: $certUrl
+    certId: $certId
+  ) {
+    id
+    title
+    issuer
+    companyImg
+    date
+    certId
+    certUrl
+    updatedAt
+  }
+}

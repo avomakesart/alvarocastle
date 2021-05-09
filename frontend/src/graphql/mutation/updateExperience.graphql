@@ -1,0 +1,11 @@
+mutation UpdateExperience($id: Int!, $input: ExperienceInput!) {
+  updateExperience(id: $id, input: $input) {
+    id
+    company
+    position
+    period
+    description
+    createdAt
+    updatedAt
+  }
+}

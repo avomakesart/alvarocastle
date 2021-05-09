@@ -1,0 +1,14 @@
+query Experiences($limit: Int!, $cursor: String) {
+  experiences(limit: $limit, cursor: $cursor) {
+    experience {
+      id
+      company
+      position
+      period
+      description
+      createdAt
+      updatedAt
+    }
+    hasMore
+  }
+}

@@ -1,0 +1,3 @@
+mutation DeleteExperience($id: Int!) {
+  deleteExperience(id: $id)
+}

@@ -1,0 +1,16 @@
+query Certificates($limit: Int!, $cursor: String) {
+  certificates(limit: $limit, cursor: $cursor) {
+    certificates {
+      id
+      title
+      issuer
+      companyImg
+      date
+      certId
+      certUrl
+      createdAt
+      updatedAt
+    }
+    hasMore
+  }
+}
