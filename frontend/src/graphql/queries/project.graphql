@@ -3,6 +3,7 @@ query Project($id: Int!) {
     id
     title
     headline
+    headlineImage
     description
     featuredImage
     points

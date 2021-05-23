@@ -1,0 +1,8 @@
+mutation CreateProjectCategory($title: String!) {
+  createProjectCategory(title: $title) {
+    id
+    title
+    createdAt
+    updatedAt
+  }
+}

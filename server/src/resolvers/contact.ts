@@ -40,14 +40,7 @@ class PaginatedContact {
 @Resolver(Contact)
 export class ContactResolver {
   @Mutation(() => Contact)
-  @UseMiddleware(isAuth)
   async createContact(@Arg('input') input: ContactInput): Promise<Contact> {
-    // const skillFind = Contact.findOne(input.subject);
-
-    // if (skillFind) {
-    //   throw new Error('Ups! experience already created');
-    // }
-
     return Contact.create({ ...input }).save();
   }
 

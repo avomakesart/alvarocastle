@@ -1,15 +1,16 @@
-import Head from 'next/head';
 import React from 'react';
-import { Hero } from '../components';
+import { Hero, NavBar, Head } from '../components';
 
 const Home = () => {
   return (
     <>
+      <NavBar />
       <Hero />
-      <Head>
-        <title>Alvaro Castle</title>
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
+      <Head
+        title='Alvaro Castle'
+        description='Alvaro Castillo is a product
+focused Software Engineer'
+      />
     </>
   );
 };

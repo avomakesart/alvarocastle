@@ -9,7 +9,7 @@ export const Hero: React.FC<HeroProps> = ({}) => {
   const [hoverRef, isHovered] = useHover() as any;
 
   return (
-    <div className='container max-w-lg px-6 md:px-4 py-32 mx-auto mt-6 mb-44 text-left md:max-w-none md:text-left'>
+    <div className='container px-6 md:px-4 py-32 mx-auto mt-6 mb-44 text-left md:max-w-none md:text-left'>
       <h1 className='animate__animated animate__fadeIn text-4xl font-extrabold leading-10 tracking-tight text-left md:text-left md:ml-8 md:text-6xl lg:text-7xl'>
         <span className='inline text-transparent leading-tight bg-clip-text bg-gradient-to-br from-white to-gray-700 md:block'>
           Alvaro Castillo is a product

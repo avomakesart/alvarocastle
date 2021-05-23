@@ -17,15 +17,15 @@ export class Skills extends BaseEntity {
 
   @Field()
   @Column()
-  title!: string;
+  title: string;
 
   @Field()
   @Column()
-  image!: string;
+  image: string;
 
   @Field()
   @Column()
-  category!: string;
+  category: string;
 
   @Field(() => String)
   @CreateDateColumn()

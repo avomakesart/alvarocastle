@@ -1,0 +1,11 @@
+query ProjectCategories($limit: Int!, $cursor: String) {
+  projectCategories(limit: $limit, cursor: $cursor) {
+    projectCategories {
+      id
+      title
+      createdAt
+      updatedAt
+    }
+    hasMore
+  }
+}

@@ -1,0 +1,7 @@
+mutation UpdateProjectCategory($id: Int!, $title: String!) {
+  updateProjectCategory(id: $id, title: $title) {
+    id
+    title
+    updatedAt
+  }
+}

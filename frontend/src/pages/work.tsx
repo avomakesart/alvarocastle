@@ -1,10 +1,12 @@
-import Head from 'next/head';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import {
   Container,
   Error,
   FilterButtons,
+  Head,
   Loader,
+  NavBar,
   Projects,
   Repositories,
 } from '../components';
@@ -14,7 +16,7 @@ import { withApollo } from '../utils';
 interface WorkProps {}
 
 const Work: React.FC<WorkProps> = ({}) => {
-  const { data, error, loading, fetchMore, variables } = useProjectsQuery({
+  const { data, error, loading } = useProjectsQuery({
     variables: { limit: 6, cursor: '' },
     notifyOnNetworkStatusChange: true,
   });
@@ -22,6 +24,8 @@ const Work: React.FC<WorkProps> = ({}) => {
   const projects = data?.projects.projects;
   const [repos, setRepos] = useState<string[]>([]);
   const [categories, setCategories] = useState<string[] | string>('all');
+
+  const router = useRouter();
 
   useEffect(() => {
     const getRepos = async () => {
@@ -56,10 +60,11 @@ const Work: React.FC<WorkProps> = ({}) => {
 
   return (
     <>
-      <Head>
-        <title>AC - Work</title>
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
+      <Head
+        title='AC - Work'
+        description='What if you have a look on the projects I worked for? and also on some of my coolest repositories on Github.'
+      />
+      <NavBar />
       <Container
         title='Explore'
         style={{ padding: 24, maxWidth: '100%', marginTop: '6.5rem' }}
@@ -73,6 +78,15 @@ const Work: React.FC<WorkProps> = ({}) => {
           currentData={categories}
         />
         <Projects projects={projects} categories={categories} />
+
+        <div className='flex justify-center mx-auto'>
+          <button
+            onClick={() => router.push('/projects')}
+            className='bg-transparent border-2 border-white text-white p-4 m-8 mx-auto rounded shadow-lg focus:outline-none hover:bg-white hover:text-black'
+          >
+            See More
+          </button>
+        </div>
 
         <Repositories repoData={sortedRepos} />
       </Container>

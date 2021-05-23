@@ -1,0 +1,8 @@
+query ProjectCategory($id: Int!) {
+  projectCategory(id: $id) {
+    id
+    title
+    createdAt
+    updatedAt
+  }
+}

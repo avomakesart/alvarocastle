@@ -24,6 +24,8 @@ class ProjectInput {
   @Field()
   headline: string;
   @Field()
+  headlineImage: string;
+  @Field()
   description: string;
   @Field()
   featuredImage: string;

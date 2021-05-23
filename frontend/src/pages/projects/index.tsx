@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import React, { useState } from 'react';
-import { Container, Error, Loader, Projects } from '../../components';
+import { Container, Error, Loader, NavBar, Projects } from '../../components';
 import { useProjectsQuery } from '../../generated/graphql';
 import { withApollo } from '../../utils';
 
@@ -9,7 +9,7 @@ interface ProjectsPageProps {}
 const ProjectsPage: React.FC<ProjectsPageProps> = ({}) => {
   const { data, error, loading } = useProjectsQuery({
     variables: { limit: 15, cursor: '' },
-    notifyOnNetworkStatusChange: true,
+    notifyOnNetworkStatusChange: false,
   });
 
   const projects = data?.projects.projects;
@@ -21,6 +21,7 @@ const ProjectsPage: React.FC<ProjectsPageProps> = ({}) => {
         <title>AC - Work</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
+      <NavBar />
       <Container
         title='All the projects'
         style={{ padding: 24, maxWidth: '100%', marginTop: '6.5rem' }}

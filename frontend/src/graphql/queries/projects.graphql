@@ -4,6 +4,7 @@ query Projects($limit: Int!, $cursor: String) {
       id
       title
       headline
+      headlineImage
       description
       featuredImage
       points

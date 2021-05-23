@@ -3,25 +3,18 @@ import {
   Ctx,
   Field,
   //   FieldResolver,
-  InputType,
   Int,
   Mutation,
   ObjectType,
   Query,
   Resolver,
   //   Root,
-  UseMiddleware
+  UseMiddleware,
 } from 'type-graphql';
 import { getConnection } from 'typeorm';
 import { Categories } from '../entities';
 import { isAuth } from '../middleware/isAuth';
 import { MyContext } from '../types';
-
-@InputType()
-class CategoryInput {
-  @Field()
-  title: string;
-}
 
 @ObjectType()
 class PaginatedCategories {
@@ -35,10 +28,8 @@ class PaginatedCategories {
 export class CategoryResolver {
   @Mutation(() => Categories)
   @UseMiddleware(isAuth)
-  async createCategory(
-    @Arg('input') input: CategoryInput
-  ): Promise<Categories> {
-    return Categories.create({ ...input }).save();
+  async createCategory(@Arg('title') title: string): Promise<Categories> {
+    return Categories.create({ title }).save();
   }
 
   @Mutation(() => Categories, { nullable: true })
@@ -78,7 +69,7 @@ export class CategoryResolver {
       select c.*
       from categories c   
       ${cursor ? `where c."createdAt" < $2` : ''}
-      order by c."createdAt" DESC
+      order by c."createdAt" ASC
       limit $1
     `,
       replacements

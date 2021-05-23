@@ -6,3 +6,4 @@ export * from './Projects';
 export * from './Skills';
 export * from './Updoot';
 export * from './User';
+export * from './ProjectCategories';

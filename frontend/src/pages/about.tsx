@@ -1,7 +1,13 @@
-import Head from 'next/head';
 import NextLink from 'next/link';
-import React, { useEffect } from 'react';
-import { Certificates, Container, Experiences, Skills } from '../components';
+import React from 'react';
+import {
+  Certificates,
+  Container,
+  Experiences,
+  Head,
+  NavBar,
+  Skills,
+} from '../components';
 import { withApollo } from '../utils';
 
 interface aboutProps {}
@@ -9,10 +15,11 @@ interface aboutProps {}
 const About: React.FC<aboutProps> = ({}) => {
   return (
     <>
-      <Head>
-        <title>AC - About</title>
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
+      <Head
+        title='AC - About'
+        description='Here you can know more about me, personally and professionally.'
+      />
+      <NavBar />
       <Container title='About'>
         <div
           id='intro'
@@ -24,10 +31,10 @@ const About: React.FC<aboutProps> = ({}) => {
             className='max-full w-72'
           />
           <p className='animate__animated animate__fadeIn max-w-xl mt-10 md:mt-0 md:ml-16 text-2xl text-left'>
-            I am a product focused software engineer based in Guadalajara, Jalisco. I create web
-            apps and cool software, focused on the best design patterns and
-            creating stories visually, through enjoyable and meaningful
-            experiences.
+            I am a product focused software engineer based in Guadalajara,
+            Jalisco. I create web apps and cool software, focused on the best
+            design patterns and creating stories visually, through enjoyable and
+            meaningful experiences.
           </p>
         </div>
 

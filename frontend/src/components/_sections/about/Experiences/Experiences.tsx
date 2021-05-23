@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { Card, Tab, Tabs } from '../../..';
 import { useExperiencesQuery } from '../../../../generated/graphql';
+import { FilteredExperience } from './FilteredExperience';
 
 interface ExperiencesProps {}
 
 export const Experiences: React.FC<ExperiencesProps> = ({}) => {
   const [showMoreExp, setShowMoreExp] = useState(false);
   const { data, error, loading } = useExperiencesQuery({
-    variables: { limit: 10, cursor: '' },
+    variables: { limit: 20, cursor: '' },
   });
 
   return (
     <Tabs color='white' vertical>
-      <Tab label='Luxoft' tabName='Luxoft'>
+      <Tab label='Globant' tabName='Globant'>
         <Card>
           {!loading && !data && (
             <div className='flex flex-col'>
@@ -21,9 +22,12 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
             </div>
           )}
           {data?.experiences.experience
-            .filter((exp) => exp.company === 'Luxoft')
+            .filter((exp) => exp.company === 'Globant')
             .map((exp) => (
-              <div className='animate__animated animate__fadeIn w-full mt-6 text-left '>
+              <div
+                className='animate__animated animate__fadeIn w-full mt-6 text-left'
+                key={exp.id}
+              >
                 <h1 className='mt-auto mb-2 font-sans text-2xl font-black tracking-tighter text-black'>
                   {exp.company}
                 </h1>
@@ -31,7 +35,7 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
                   {exp.position}
                 </p>
                 <p className='text-xs leading-relaxed text-gray-400'>
-                  period {exp.period} Present
+                  period May, 2021 to Present
                 </p>
 
                 <p className='mt-4 text-sm leading-relaxed tracking-tighter text-gray-500 dark:text-gray-100'>
@@ -55,11 +59,11 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
                             width='20'
                             height='20'
                             viewBox='0 0 24 24'
-                            stroke-width='1.5'
+                            strokeWidth='1.5'
                             stroke='currentColor'
                             fill='none'
-                            stroke-linecap='round'
-                            stroke-linejoin='round'
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
                           >
                             <path
                               stroke='none'
@@ -75,7 +79,7 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
                         <>
                           <div
                             dangerouslySetInnerHTML={{
-                              __html: exp.description.substring(200, 1000),
+                              __html: exp.description.substring(800, 2000),
                             }}
                           />
                           <button
@@ -89,11 +93,11 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
                               width='20'
                               height='20'
                               viewBox='0 0 24 24'
-                              stroke-width='1.5'
+                              strokeWidth='1.5'
                               stroke='currentColor'
                               fill='none'
-                              stroke-linecap='round'
-                              stroke-linejoin='round'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
                             >
                               <path
                                 stroke='none'
@@ -127,11 +131,11 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
                             width='20'
                             height='20'
                             viewBox='0 0 24 24'
-                            stroke-width='1.5'
+                            strokeWidth='1.5'
                             stroke='currentColor'
                             fill='none'
-                            stroke-linecap='round'
-                            stroke-linejoin='round'
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
                           >
                             <path
                               stroke='none'
@@ -148,7 +152,7 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
                       {showMoreExp && (
                         <div
                           dangerouslySetInnerHTML={{
-                            __html: exp.description.substring(200, 1000),
+                            __html: exp.description.substring(300, 1234444),
                           }}
                         />
                       )}
@@ -159,6 +163,14 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
             ))}
         </Card>
       </Tab>
+
+      <FilteredExperience
+        tabLabel='Luxoft'
+        tabName='Luxoft'
+        data={data}
+        company='Luxoft'
+      />
+
       <Tab label='EPAM' tabName='EPAM'>
         <Card>
           {!loading && !data && (
@@ -170,7 +182,10 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
           {data?.experiences.experience
             .filter((exp) => exp.company === 'EPAM')
             .map((exp) => (
-              <div className='animate__animated animate__fadeIn w-full mt-6 text-left '>
+              <div
+                className='animate__animated animate__fadeIn w-full mt-6 text-left'
+                key={exp.id}
+              >
                 <h1 className='mt-auto mb-2 font-sans text-2xl font-black tracking-tighter text-black'>
                   {exp.company}
                 </h1>
@@ -187,7 +202,7 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
                     <>
                       <div
                         dangerouslySetInnerHTML={{
-                          __html: exp.description.substring(0, 200),
+                          __html: exp.description.substring(0, 300),
                         }}
                       />
 
@@ -203,11 +218,11 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
                             width='20'
                             height='20'
                             viewBox='0 0 24 24'
-                            stroke-width='1.5'
+                            strokeWidth='1.5'
                             stroke='currentColor'
                             fill='none'
-                            stroke-linecap='round'
-                            stroke-linejoin='round'
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
                           >
                             <path
                               stroke='none'
@@ -223,7 +238,7 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
                         <>
                           <div
                             dangerouslySetInnerHTML={{
-                              __html: exp.description.substring(200, 1000),
+                              __html: exp.description.substring(300, 200000),
                             }}
                           />
                           <button
@@ -237,11 +252,11 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
                               width='20'
                               height='20'
                               viewBox='0 0 24 24'
-                              stroke-width='1.5'
+                              strokeWidth='1.5'
                               stroke='currentColor'
                               fill='none'
-                              stroke-linecap='round'
-                              stroke-linejoin='round'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
                             >
                               <path
                                 stroke='none'
@@ -275,11 +290,11 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
                             width='20'
                             height='20'
                             viewBox='0 0 24 24'
-                            stroke-width='1.5'
+                            strokeWidth='1.5'
                             stroke='currentColor'
                             fill='none'
-                            stroke-linecap='round'
-                            stroke-linejoin='round'
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
                           >
                             <path
                               stroke='none'
@@ -296,7 +311,10 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
                       {showMoreExp && (
                         <div
                           dangerouslySetInnerHTML={{
-                            __html: exp.description.substring(200, 1000),
+                            __html: exp.description.substring(
+                              400,
+                              32344333353544
+                            ),
                           }}
                         />
                       )}
@@ -319,7 +337,10 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
           {data?.experiences.experience
             .filter((exp) => exp.company === 'USPK')
             .map((exp) => (
-              <div className='animate__animated animate__fadeIn w-full mt-6 text-left '>
+              <div
+                className='animate__animated animate__fadeIn w-full mt-6 text-left'
+                key={exp.id}
+              >
                 <h1 className='mt-auto mb-2 font-sans text-2xl font-black tracking-tighter text-black'>
                   {exp.company}
                 </h1>
@@ -351,11 +372,11 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
                             width='20'
                             height='20'
                             viewBox='0 0 24 24'
-                            stroke-width='1.5'
+                            strokeWidth='1.5'
                             stroke='currentColor'
                             fill='none'
-                            stroke-linecap='round'
-                            stroke-linejoin='round'
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
                           >
                             <path
                               stroke='none'
@@ -371,7 +392,7 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
                         <>
                           <div
                             dangerouslySetInnerHTML={{
-                              __html: exp.description.substring(200, 1000),
+                              __html: exp.description.substring(200, 2000),
                             }}
                           />
 
@@ -386,11 +407,11 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
                               width='20'
                               height='20'
                               viewBox='0 0 24 24'
-                              stroke-width='1.5'
+                              strokeWidth='1.5'
                               stroke='currentColor'
                               fill='none'
-                              stroke-linecap='round'
-                              stroke-linejoin='round'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
                             >
                               <path
                                 stroke='none'
@@ -424,11 +445,11 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
                             width='20'
                             height='20'
                             viewBox='0 0 24 24'
-                            stroke-width='1.5'
+                            strokeWidth='1.5'
                             stroke='currentColor'
                             fill='none'
-                            stroke-linecap='round'
-                            stroke-linejoin='round'
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
                           >
                             <path
                               stroke='none'
@@ -467,7 +488,10 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
           {data?.experiences.experience
             .filter((exp) => exp.company === 'Freelance')
             .map((exp) => (
-              <div className='animate__animated animate__fadeIn w-full mt-6 text-left '>
+              <div
+                className='animate__animated animate__fadeIn w-full mt-6 text-left'
+                key={exp.id}
+              >
                 <h1 className='mt-auto mb-2 font-sans text-2xl font-black tracking-tighter text-black'>
                   {exp.company}
                 </h1>
@@ -475,7 +499,7 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
                   {exp.position}
                 </p>
                 <p className='text-xs leading-relaxed text-gray-400'>
-                  period {exp.period} Present
+                  period {exp.period}{' '}
                 </p>
 
                 <p className='mt-4 text-sm leading-relaxed tracking-tighter text-gray-500 dark:text-gray-100'>
@@ -505,11 +529,11 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
                               width='20'
                               height='20'
                               viewBox='0 0 24 24'
-                              stroke-width='1.5'
+                              strokeWidth='1.5'
                               stroke='currentColor'
                               fill='none'
-                              stroke-linecap='round'
-                              stroke-linejoin='round'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
                             >
                               <path
                                 stroke='none'
@@ -543,11 +567,11 @@ export const Experiences: React.FC<ExperiencesProps> = ({}) => {
                             width='20'
                             height='20'
                             viewBox='0 0 24 24'
-                            stroke-width='1.5'
+                            strokeWidth='1.5'
                             stroke='currentColor'
                             fill='none'
-                            stroke-linecap='round'
-                            stroke-linejoin='round'
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
                           >
                             <path
                               stroke='none'

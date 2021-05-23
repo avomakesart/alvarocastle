@@ -11,9 +11,21 @@ body {
     color: #DDDDDD;
     margin: 0;
     padding: 0;
-    width: 100vw;
     display: flex;
     flex-direction: column;
+}
+
+::selection {
+    background: gray;
+    color: white;
+}
+
+.react-datepicker-wrapper {
+    width: 100%
+}
+
+.ql-editor .ql-blank {
+    height: 11rem!important;
 }
 
 footer {

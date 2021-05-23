@@ -90,7 +90,7 @@ export class ExperienceResolver {
       select e.*
       from experience e   
       ${cursor ? `where e."createdAt" < $2` : ''}
-      order by e."createdAt" DESC
+      order by e."createdAt" ASC
       limit $1
     `,
       replacements

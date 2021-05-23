@@ -107,7 +107,7 @@ export class CertificateResolver {
       select c.*
       from certificates c   
       ${cursor ? `where c."createdAt" < $2` : ''}
-      order by c."createdAt" DESC
+      order by c."createdAt" ASC
       limit $1
     `,
       replacements

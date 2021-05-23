@@ -14,7 +14,7 @@ export const Repositories: React.FC<RepositoriesProps> = ({ repoData }) => {
         </h1>
         <div className='animate__animated animate__fadeIn flex flex-wrap text-left mt-16'>
           {repoData.slice(0, 6).map((res: any) => (
-            <div className='px-8 py-6 lg:w-1/3 md:w-full'>
+            <div className='px-8 py-6 lg:w-1/3 md:w-full' key={res.id}>
               <div className='flex flex-row items-center mb-3'>
                 <div className='inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 mr-3 text-white rounded-full'>
                   <svg

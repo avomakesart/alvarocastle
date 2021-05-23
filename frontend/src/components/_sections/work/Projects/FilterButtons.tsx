@@ -27,6 +27,7 @@ export const FilterButtons: React.FC<FilterButtonsProps> = ({
             project === currentData ? 'text-white' : 'text-gray-400'
           }`}
           onClick={() => setState(project)}
+          key={project}
         >
           {project}
         </span>

@@ -1,55 +1,78 @@
+import React, { CSSProperties } from 'react';
 import { useField } from 'formik';
-import React, { CSSProperties, InputHTMLAttributes, ReactElement } from 'react';
 
-type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
+interface InputProps {
   htmlFor: string;
-  onChange: any;
-  label?: string | ReactElement;
-  labelColor?: string;
-  textAlign?: string;
-  type: string | any;
-  placeholder?: string;
+  id?: string;
   name: string;
-  focusColor?: string;
-  id: string;
+  placeHolder?: string;
+  label: string;
+  type: string;
+  onChange?: any;
+  onFocus?: any;
+  onClick?: () => void;
+  onBlur?: any;
+  value: any;
+  defaultValue?: any;
+  pattern?: string | undefined;
+  min?: number;
+  max?: number;
+  labelStyle?: CSSProperties;
   style?: CSSProperties;
-};
+}
 
-export const Input: React.FC<InputFieldProps> = ({
+export const Input: React.FC<InputProps> = ({
   htmlFor,
+  id,
+  placeHolder,
   label,
   type,
+  value,
   onChange,
-  placeholder,
-  labelColor,
-  focusColor,
-  textAlign,
-  id,
+  onClick,
+  onBlur,
+  onFocus,
+  defaultValue,
+  min,
+  max,
+  pattern,
+  labelStyle,
   style,
   ...props
 }) => {
   const [field, { error }] = useField(props);
+
   return (
-    <>
+    <div>
       <label
         htmlFor={htmlFor}
-        className={`text-sm leading-7 ${textAlign} text-${labelColor}`}
-    >
+        className='block text-sm font-medium text-gray-700'
+        style={labelStyle}
+      >
         {label}
       </label>
-      <input
-        type={type}
-        id={id}
-        name={field.name}
-        placeholder={placeholder}
-        onChange={field.onChange}
-        value={field.value}
-        style={style}
-        className={`${
-          error &&
-          'border-red-500 focus:ring-2 focus:ring-red-200 focus:outline-none'
-        } w-full px-4 py-2 mb-4 text-black transition duration-500 ease-in-out transform bg-gray-100 border-transparent rounded-lg mr-4text-base focus:border-${focusColor} focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2`}
-      />
-    </>
+      <div className='mt-1 relative rounded-md shadow-sm'>
+        <input
+          type={type}
+          name={field.name}
+          id={id}
+          className={`${
+            error &&
+            'border-red-500 focus:ring-2 focus:ring-red-200 focus:outline-none'
+          } block w-full p-2 pl-4 sm:text-sm border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-gray-800`}
+          placeholder={placeHolder}
+          onChange={field.onChange}
+          onClick={onClick}
+          onBlur={field.onBlur}
+          onFocus={onFocus}
+          value={field.value}
+          defaultValue={defaultValue}
+          pattern={pattern}
+          min={min}
+          max={max}
+          style={style}
+        />
+      </div>
+    </div>
   );
 };

@@ -6,7 +6,7 @@ interface SkillsProps {}
 
 export const Skills: React.FC<SkillsProps> = ({}) => {
   const { data, error, loading } = useSkillsQuery({
-    variables: { limit: 25, cursor: '' },
+    variables: { limit: 30, cursor: '' },
   });
 
   return (
@@ -21,7 +21,7 @@ export const Skills: React.FC<SkillsProps> = ({}) => {
           )}
           <div className='animate__animated animate__fadeIn w-full mt-6 text-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
             {data?.skills.skills
-              .filter((skill) => skill.category === 'dev')
+              .filter((skill) => skill.category === 'Tech')
               .map((skill) => (
                 <div key={skill.id} className='flex flex-col items-center'>
                   <Image src={skill.image} alt={skill.title} width='16' />
@@ -43,7 +43,7 @@ export const Skills: React.FC<SkillsProps> = ({}) => {
           )}
           <div className='animate__animated animate__fadeIn w-full mt-6 text-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
             {data?.skills.skills
-              .filter((skill) => skill.category === 'styles')
+              .filter((skill) => skill.category === 'Styles')
               .map((skill) => (
                 <div key={skill.id} className='flex flex-col items-center'>
                   <Image src={skill.image} alt={skill.title} width='16' />
@@ -65,7 +65,7 @@ export const Skills: React.FC<SkillsProps> = ({}) => {
           )}
           <div className='animate__animated animate__fadeIn w-full mt-6 text-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
             {data?.skills.skills
-              .filter((skill) => skill.category === 'database')
+              .filter((skill) => skill.category === 'Databases')
               .map((skill) => (
                 <div key={skill.id} className='flex flex-col items-center'>
                   <Image src={skill.image} alt={skill.title} width='16' />
@@ -87,7 +87,7 @@ export const Skills: React.FC<SkillsProps> = ({}) => {
           )}
           <div className='animate__animated animate__fadeIn w-full mt-6 text-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
             {data?.skills.skills
-              .filter((skill) => skill.category === 'tool')
+              .filter((skill) => skill.category === 'Tools')
               .map((skill) => (
                 <div key={skill.id} className='flex flex-col items-center'>
                   <Image src={skill.image} alt={skill.title} width='16' />
@@ -109,7 +109,7 @@ export const Skills: React.FC<SkillsProps> = ({}) => {
           )}
           <div className='animate__animated animate__fadeIn w-full mt-6 text-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
             {data?.skills.skills
-              .filter((skill) => skill.category === 'ux')
+              .filter((skill) => skill.category === 'UX')
               .map((skill) => (
                 <div key={skill.id} className='flex flex-col items-center'>
                   <Image src={skill.image} alt={skill.title} width='16' />

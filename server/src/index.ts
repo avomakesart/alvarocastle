@@ -16,6 +16,7 @@ import {
   Contact,
   Experience,
   Projects,
+  ProjectCategories,
   Skills,
   Updoot,
   Users,
@@ -25,13 +26,14 @@ import {
   CertificateResolver,
   ContactResolver,
   ExperienceResolver,
+  ProjectCategoryResolver,
   ProjectResolver,
   SkillResolver,
   UserResolver,
 } from './resolvers';
 import { createUpdootLoader } from './utils/createUpdootLoader';
 import { createUserLoader } from './utils/createUserLoader';
-import { createCategoryLoader  } from './utils/createCategoryLoader';
+import { createCategoryLoader } from './utils/createCategoryLoader';
 
 const main = async () => {
   const conn = await createConnection({
@@ -46,6 +48,7 @@ const main = async () => {
       Contact,
       Experience,
       Projects,
+      ProjectCategories,
       Skills,
       Users,
       Updoot,
@@ -79,11 +82,21 @@ const main = async () => {
         httpOnly: true,
         sameSite: 'lax',
         secure: __prod__,
-        domain: __prod__ ? '.codeponder.com' : undefined,
+        domain: __prod__ ? '.alvarocastle.com' : undefined,
       },
       saveUninitialized: false,
       secret: process.env.SESSION_SECRET,
       resave: false,
+    })
+  );
+
+  app.get('/', ({ res }) =>
+    res?.status(200).json({
+      greeting: 'Hey welcome to my graphql server',
+      message:
+        'Just a reminder, this server was created for my personal website https://alvarocastle.com',
+      rules:
+        'If you want to use it, just go to my repo https://github.com/avomakesart/alvarocastle/tree/main/server, fork it and clone it.',
     })
   );
 
@@ -95,6 +108,7 @@ const main = async () => {
         ContactResolver,
         ExperienceResolver,
         ProjectResolver,
+        ProjectCategoryResolver,
         SkillResolver,
         UserResolver,
       ],

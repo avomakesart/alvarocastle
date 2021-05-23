@@ -1,10 +1,12 @@
-import { NavBar, Footer } from '../components';
+import { Footer } from '../components';
+import { ToastContainer } from 'react-toastify';
 import '../styles/globals.css';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 function MyApp({ Component, pageProps }: any) {
   return (
     <>
-      <NavBar />
+      <ToastContainer />
       <Component {...pageProps} />
       <Footer />
     </>

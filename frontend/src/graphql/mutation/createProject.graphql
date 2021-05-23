@@ -2,6 +2,8 @@ mutation CreateProject($input: ProjectInput!) {
   createProject(input: $input) {
     id
     title
+    headline
+    headlineImage
     featuredImage
     description
     voteStatus

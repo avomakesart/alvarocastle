@@ -29,6 +29,8 @@ export type Query = {
   skills: PaginatedSkills;
   skill?: Maybe<Skills>;
   me?: Maybe<Users>;
+  projectCategories: PaginatedProjectCategories;
+  projectCategory?: Maybe<ProjectCategories>;
 };
 
 
@@ -97,6 +99,17 @@ export type QuerySkillArgs = {
   id: Scalars['Int'];
 };
 
+
+export type QueryProjectCategoriesArgs = {
+  cursor?: Maybe<Scalars['String']>;
+  limit: Scalars['Int'];
+};
+
+
+export type QueryProjectCategoryArgs = {
+  id: Scalars['Int'];
+};
+
 export type PaginatedCategories = {
   __typename?: 'PaginatedCategories';
   categories: Array<Categories>;
@@ -107,7 +120,6 @@ export type Categories = {
   __typename?: 'Categories';
   id: Scalars['Float'];
   title: Scalars['String'];
-  projectId: Scalars['Float'];
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
 };
@@ -176,6 +188,7 @@ export type Projects = {
   id: Scalars['Float'];
   title: Scalars['String'];
   headline: Scalars['String'];
+  headlineImage: Scalars['String'];
   description: Scalars['String'];
   featuredImage: Scalars['String'];
   category: Scalars['String'];
@@ -217,6 +230,20 @@ export type Skills = {
   updatedAt: Scalars['String'];
 };
 
+export type PaginatedProjectCategories = {
+  __typename?: 'PaginatedProjectCategories';
+  projectCategories: Array<ProjectCategories>;
+  hasMore: Scalars['Boolean'];
+};
+
+export type ProjectCategories = {
+  __typename?: 'ProjectCategories';
+  id: Scalars['Float'];
+  title: Scalars['String'];
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createCategory: Categories;
@@ -245,11 +272,14 @@ export type Mutation = {
   login: UserResponse;
   logout: Scalars['Boolean'];
   updateUser?: Maybe<Users>;
+  createProjectCategory: ProjectCategories;
+  updateProjectCategory?: Maybe<ProjectCategories>;
+  deleteProjectCategory: Scalars['Boolean'];
 };
 
 
 export type MutationCreateCategoryArgs = {
-  input: CategoryInput;
+  title: Scalars['String'];
 };
 
 
@@ -388,8 +418,20 @@ export type MutationUpdateUserArgs = {
   id: Scalars['Int'];
 };
 
-export type CategoryInput = {
+
+export type MutationCreateProjectCategoryArgs = {
   title: Scalars['String'];
+};
+
+
+export type MutationUpdateProjectCategoryArgs = {
+  title: Scalars['String'];
+  id: Scalars['Int'];
+};
+
+
+export type MutationDeleteProjectCategoryArgs = {
+  id: Scalars['Int'];
 };
 
 export type CertificateInput = {
@@ -418,6 +460,7 @@ export type ExperienceInput = {
 export type ProjectInput = {
   title: Scalars['String'];
   headline: Scalars['String'];
+  headlineImage: Scalars['String'];
   description: Scalars['String'];
   featuredImage: Scalars['String'];
   category: Scalars['String'];
@@ -494,7 +537,7 @@ export type ChangePasswordMutation = (
 );
 
 export type CreateCategoryMutationVariables = Exact<{
-  input: CategoryInput;
+  title: Scalars['String'];
 }>;
 
 
@@ -554,11 +597,24 @@ export type CreateProjectMutation = (
   { __typename?: 'Mutation' }
   & { createProject: (
     { __typename?: 'Projects' }
-    & Pick<Projects, 'id' | 'title' | 'featuredImage' | 'description' | 'voteStatus' | 'points' | 'category' | 'creatorId' | 'createdAt' | 'updatedAt'>
+    & Pick<Projects, 'id' | 'title' | 'headline' | 'headlineImage' | 'featuredImage' | 'description' | 'voteStatus' | 'points' | 'category' | 'creatorId' | 'createdAt' | 'updatedAt'>
     & { creator: (
       { __typename?: 'Users' }
       & Pick<Users, 'id' | 'firstName' | 'lastName' | 'email'>
     ) }
+  ) }
+);
+
+export type CreateProjectCategoryMutationVariables = Exact<{
+  title: Scalars['String'];
+}>;
+
+
+export type CreateProjectCategoryMutation = (
+  { __typename?: 'Mutation' }
+  & { createProjectCategory: (
+    { __typename?: 'ProjectCategories' }
+    & Pick<ProjectCategories, 'id' | 'title' | 'createdAt' | 'updatedAt'>
   ) }
 );
 
@@ -613,6 +669,16 @@ export type DeleteExperienceMutationVariables = Exact<{
 export type DeleteExperienceMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'deleteExperience'>
+);
+
+export type DeleteProjectCategoryMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type DeleteProjectCategoryMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'deleteProjectCategory'>
 );
 
 export type ForgotPasswordMutationVariables = Exact<{
@@ -722,6 +788,20 @@ export type UpdateProjectMutation = (
       { __typename?: 'Users' }
       & Pick<Users, 'id' | 'firstName' | 'lastName' | 'email'>
     ) }
+  )> }
+);
+
+export type UpdateProjectCategoryMutationVariables = Exact<{
+  id: Scalars['Int'];
+  title: Scalars['String'];
+}>;
+
+
+export type UpdateProjectCategoryMutation = (
+  { __typename?: 'Mutation' }
+  & { updateProjectCategory?: Maybe<(
+    { __typename?: 'ProjectCategories' }
+    & Pick<ProjectCategories, 'id' | 'title' | 'updatedAt'>
   )> }
 );
 
@@ -908,11 +988,42 @@ export type ProjectQuery = (
   { __typename?: 'Query' }
   & { project?: Maybe<(
     { __typename?: 'Projects' }
-    & Pick<Projects, 'id' | 'title' | 'headline' | 'description' | 'featuredImage' | 'points' | 'voteStatus' | 'category' | 'creatorId' | 'createdAt' | 'updatedAt'>
+    & Pick<Projects, 'id' | 'title' | 'headline' | 'headlineImage' | 'description' | 'featuredImage' | 'points' | 'voteStatus' | 'category' | 'creatorId' | 'createdAt' | 'updatedAt'>
     & { creator: (
       { __typename?: 'Users' }
       & Pick<Users, 'id' | 'firstName' | 'lastName' | 'email'>
     ) }
+  )> }
+);
+
+export type ProjectCategoriesQueryVariables = Exact<{
+  limit: Scalars['Int'];
+  cursor?: Maybe<Scalars['String']>;
+}>;
+
+
+export type ProjectCategoriesQuery = (
+  { __typename?: 'Query' }
+  & { projectCategories: (
+    { __typename?: 'PaginatedProjectCategories' }
+    & Pick<PaginatedProjectCategories, 'hasMore'>
+    & { projectCategories: Array<(
+      { __typename?: 'ProjectCategories' }
+      & Pick<ProjectCategories, 'id' | 'title' | 'createdAt' | 'updatedAt'>
+    )> }
+  ) }
+);
+
+export type ProjectCategoryQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type ProjectCategoryQuery = (
+  { __typename?: 'Query' }
+  & { projectCategory?: Maybe<(
+    { __typename?: 'ProjectCategories' }
+    & Pick<ProjectCategories, 'id' | 'title' | 'createdAt' | 'updatedAt'>
   )> }
 );
 
@@ -929,7 +1040,7 @@ export type ProjectsQuery = (
     & Pick<PaginatedProjects, 'hasMore'>
     & { projects: Array<(
       { __typename?: 'Projects' }
-      & Pick<Projects, 'id' | 'title' | 'headline' | 'description' | 'featuredImage' | 'points' | 'voteStatus' | 'category' | 'creatorId' | 'createdAt' | 'updatedAt'>
+      & Pick<Projects, 'id' | 'title' | 'headline' | 'headlineImage' | 'description' | 'featuredImage' | 'points' | 'voteStatus' | 'category' | 'creatorId' | 'createdAt' | 'updatedAt'>
       & { creator: (
         { __typename?: 'Users' }
         & Pick<Users, 'id' | 'firstName' | 'lastName' | 'email'>
@@ -1032,8 +1143,8 @@ export type ChangePasswordMutationHookResult = ReturnType<typeof useChangePasswo
 export type ChangePasswordMutationResult = Apollo.MutationResult<ChangePasswordMutation>;
 export type ChangePasswordMutationOptions = Apollo.BaseMutationOptions<ChangePasswordMutation, ChangePasswordMutationVariables>;
 export const CreateCategoryDocument = gql`
-    mutation CreateCategory($input: CategoryInput!) {
-  createCategory(input: $input) {
+    mutation CreateCategory($title: String!) {
+  createCategory(title: $title) {
     id
     title
     createdAt
@@ -1056,7 +1167,7 @@ export type CreateCategoryMutationFn = Apollo.MutationFunction<CreateCategoryMut
  * @example
  * const [createCategoryMutation, { data, loading, error }] = useCreateCategoryMutation({
  *   variables: {
- *      input: // value for 'input'
+ *      title: // value for 'title'
  *   },
  * });
  */
@@ -1190,6 +1301,8 @@ export const CreateProjectDocument = gql`
   createProject(input: $input) {
     id
     title
+    headline
+    headlineImage
     featuredImage
     description
     voteStatus
@@ -1233,6 +1346,42 @@ export function useCreateProjectMutation(baseOptions?: Apollo.MutationHookOption
 export type CreateProjectMutationHookResult = ReturnType<typeof useCreateProjectMutation>;
 export type CreateProjectMutationResult = Apollo.MutationResult<CreateProjectMutation>;
 export type CreateProjectMutationOptions = Apollo.BaseMutationOptions<CreateProjectMutation, CreateProjectMutationVariables>;
+export const CreateProjectCategoryDocument = gql`
+    mutation CreateProjectCategory($title: String!) {
+  createProjectCategory(title: $title) {
+    id
+    title
+    createdAt
+    updatedAt
+  }
+}
+    `;
+export type CreateProjectCategoryMutationFn = Apollo.MutationFunction<CreateProjectCategoryMutation, CreateProjectCategoryMutationVariables>;
+
+/**
+ * __useCreateProjectCategoryMutation__
+ *
+ * To run a mutation, you first call `useCreateProjectCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateProjectCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createProjectCategoryMutation, { data, loading, error }] = useCreateProjectCategoryMutation({
+ *   variables: {
+ *      title: // value for 'title'
+ *   },
+ * });
+ */
+export function useCreateProjectCategoryMutation(baseOptions?: Apollo.MutationHookOptions<CreateProjectCategoryMutation, CreateProjectCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateProjectCategoryMutation, CreateProjectCategoryMutationVariables>(CreateProjectCategoryDocument, options);
+      }
+export type CreateProjectCategoryMutationHookResult = ReturnType<typeof useCreateProjectCategoryMutation>;
+export type CreateProjectCategoryMutationResult = Apollo.MutationResult<CreateProjectCategoryMutation>;
+export type CreateProjectCategoryMutationOptions = Apollo.BaseMutationOptions<CreateProjectCategoryMutation, CreateProjectCategoryMutationVariables>;
 export const CreateSkillDocument = gql`
     mutation CreateSkill($input: SkillInput!) {
   createSkill(input: $input) {
@@ -1395,6 +1544,37 @@ export function useDeleteExperienceMutation(baseOptions?: Apollo.MutationHookOpt
 export type DeleteExperienceMutationHookResult = ReturnType<typeof useDeleteExperienceMutation>;
 export type DeleteExperienceMutationResult = Apollo.MutationResult<DeleteExperienceMutation>;
 export type DeleteExperienceMutationOptions = Apollo.BaseMutationOptions<DeleteExperienceMutation, DeleteExperienceMutationVariables>;
+export const DeleteProjectCategoryDocument = gql`
+    mutation DeleteProjectCategory($id: Int!) {
+  deleteProjectCategory(id: $id)
+}
+    `;
+export type DeleteProjectCategoryMutationFn = Apollo.MutationFunction<DeleteProjectCategoryMutation, DeleteProjectCategoryMutationVariables>;
+
+/**
+ * __useDeleteProjectCategoryMutation__
+ *
+ * To run a mutation, you first call `useDeleteProjectCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteProjectCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteProjectCategoryMutation, { data, loading, error }] = useDeleteProjectCategoryMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteProjectCategoryMutation(baseOptions?: Apollo.MutationHookOptions<DeleteProjectCategoryMutation, DeleteProjectCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteProjectCategoryMutation, DeleteProjectCategoryMutationVariables>(DeleteProjectCategoryDocument, options);
+      }
+export type DeleteProjectCategoryMutationHookResult = ReturnType<typeof useDeleteProjectCategoryMutation>;
+export type DeleteProjectCategoryMutationResult = Apollo.MutationResult<DeleteProjectCategoryMutation>;
+export type DeleteProjectCategoryMutationOptions = Apollo.BaseMutationOptions<DeleteProjectCategoryMutation, DeleteProjectCategoryMutationVariables>;
 export const ForgotPasswordDocument = gql`
     mutation ForgotPassword($email: String!) {
   forgotPassword(email: $email)
@@ -1701,6 +1881,42 @@ export function useUpdateProjectMutation(baseOptions?: Apollo.MutationHookOption
 export type UpdateProjectMutationHookResult = ReturnType<typeof useUpdateProjectMutation>;
 export type UpdateProjectMutationResult = Apollo.MutationResult<UpdateProjectMutation>;
 export type UpdateProjectMutationOptions = Apollo.BaseMutationOptions<UpdateProjectMutation, UpdateProjectMutationVariables>;
+export const UpdateProjectCategoryDocument = gql`
+    mutation UpdateProjectCategory($id: Int!, $title: String!) {
+  updateProjectCategory(id: $id, title: $title) {
+    id
+    title
+    updatedAt
+  }
+}
+    `;
+export type UpdateProjectCategoryMutationFn = Apollo.MutationFunction<UpdateProjectCategoryMutation, UpdateProjectCategoryMutationVariables>;
+
+/**
+ * __useUpdateProjectCategoryMutation__
+ *
+ * To run a mutation, you first call `useUpdateProjectCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateProjectCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateProjectCategoryMutation, { data, loading, error }] = useUpdateProjectCategoryMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      title: // value for 'title'
+ *   },
+ * });
+ */
+export function useUpdateProjectCategoryMutation(baseOptions?: Apollo.MutationHookOptions<UpdateProjectCategoryMutation, UpdateProjectCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateProjectCategoryMutation, UpdateProjectCategoryMutationVariables>(UpdateProjectCategoryDocument, options);
+      }
+export type UpdateProjectCategoryMutationHookResult = ReturnType<typeof useUpdateProjectCategoryMutation>;
+export type UpdateProjectCategoryMutationResult = Apollo.MutationResult<UpdateProjectCategoryMutation>;
+export type UpdateProjectCategoryMutationOptions = Apollo.BaseMutationOptions<UpdateProjectCategoryMutation, UpdateProjectCategoryMutationVariables>;
 export const UpdateSkillDocument = gql`
     mutation UpdateSkill($id: Int!, $input: SkillInput!) {
   updateSkill(id: $id, input: $input) {
@@ -2193,6 +2409,7 @@ export const ProjectDocument = gql`
     id
     title
     headline
+    headlineImage
     description
     featuredImage
     points
@@ -2238,6 +2455,86 @@ export function useProjectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Pr
 export type ProjectQueryHookResult = ReturnType<typeof useProjectQuery>;
 export type ProjectLazyQueryHookResult = ReturnType<typeof useProjectLazyQuery>;
 export type ProjectQueryResult = Apollo.QueryResult<ProjectQuery, ProjectQueryVariables>;
+export const ProjectCategoriesDocument = gql`
+    query ProjectCategories($limit: Int!, $cursor: String) {
+  projectCategories(limit: $limit, cursor: $cursor) {
+    projectCategories {
+      id
+      title
+      createdAt
+      updatedAt
+    }
+    hasMore
+  }
+}
+    `;
+
+/**
+ * __useProjectCategoriesQuery__
+ *
+ * To run a query within a React component, call `useProjectCategoriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProjectCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProjectCategoriesQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      cursor: // value for 'cursor'
+ *   },
+ * });
+ */
+export function useProjectCategoriesQuery(baseOptions: Apollo.QueryHookOptions<ProjectCategoriesQuery, ProjectCategoriesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProjectCategoriesQuery, ProjectCategoriesQueryVariables>(ProjectCategoriesDocument, options);
+      }
+export function useProjectCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProjectCategoriesQuery, ProjectCategoriesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProjectCategoriesQuery, ProjectCategoriesQueryVariables>(ProjectCategoriesDocument, options);
+        }
+export type ProjectCategoriesQueryHookResult = ReturnType<typeof useProjectCategoriesQuery>;
+export type ProjectCategoriesLazyQueryHookResult = ReturnType<typeof useProjectCategoriesLazyQuery>;
+export type ProjectCategoriesQueryResult = Apollo.QueryResult<ProjectCategoriesQuery, ProjectCategoriesQueryVariables>;
+export const ProjectCategoryDocument = gql`
+    query ProjectCategory($id: Int!) {
+  projectCategory(id: $id) {
+    id
+    title
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+/**
+ * __useProjectCategoryQuery__
+ *
+ * To run a query within a React component, call `useProjectCategoryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProjectCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProjectCategoryQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useProjectCategoryQuery(baseOptions: Apollo.QueryHookOptions<ProjectCategoryQuery, ProjectCategoryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProjectCategoryQuery, ProjectCategoryQueryVariables>(ProjectCategoryDocument, options);
+      }
+export function useProjectCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProjectCategoryQuery, ProjectCategoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProjectCategoryQuery, ProjectCategoryQueryVariables>(ProjectCategoryDocument, options);
+        }
+export type ProjectCategoryQueryHookResult = ReturnType<typeof useProjectCategoryQuery>;
+export type ProjectCategoryLazyQueryHookResult = ReturnType<typeof useProjectCategoryLazyQuery>;
+export type ProjectCategoryQueryResult = Apollo.QueryResult<ProjectCategoryQuery, ProjectCategoryQueryVariables>;
 export const ProjectsDocument = gql`
     query Projects($limit: Int!, $cursor: String) {
   projects(limit: $limit, cursor: $cursor) {
@@ -2245,6 +2542,7 @@ export const ProjectsDocument = gql`
       id
       title
       headline
+      headlineImage
       description
       featuredImage
       points
