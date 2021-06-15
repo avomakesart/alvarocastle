@@ -1,6 +1,6 @@
 {
   "name": "with-tailwindcss",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -48,7 +48,6 @@
     "remark-gfm": "^1.0.0",
     "scrollreveal": "^4.0.9",
     "showdown": "^1.9.1",
-    "tailwindcss": "^2.0.2",
     "urql": "^1.11.6",
     "wonka": "^4.0.15",
     "yarn": "^1.22.10",
@@ -70,7 +69,7 @@
     "@types/showdown": "^1.9.3",
     "autoprefixer": "^10.0.4",
     "postcss": "^8.1.10",
-    "tailwindcss": "^2.0.2",
+    "tailwindcss": "^2.1.2",
     "typescript": "^4.2.3"
   }
 }

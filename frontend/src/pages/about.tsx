@@ -30,7 +30,7 @@ const About: React.FC<aboutProps> = ({}) => {
             alt='profile'
             className='max-full w-72'
           />
-          <p className='animate__animated animate__fadeIn max-w-xl mt-10 md:mt-0 md:ml-16 text-2xl text-left'>
+          <p className='animate__animated animate__fadeIn max-w-xl mt-10 md:mt-0 md:ml-16 text-2xl text-justify'>
             I am a product focused software engineer based in Guadalajara,
             Jalisco. I create web apps and cool software, focused on the best
             design patterns and creating stories visually, through enjoyable and
@@ -69,4 +69,4 @@ const About: React.FC<aboutProps> = ({}) => {
   );
 };
 
-export default withApollo({ ssr: true })(About);
+export default withApollo({ ssr: false })(About);

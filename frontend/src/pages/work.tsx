@@ -94,4 +94,4 @@ const Work: React.FC<WorkProps> = ({}) => {
   );
 };
 
-export default withApollo({ ssr: true })(Work);
+export default withApollo({ ssr: false })(Work);

@@ -10,6 +10,7 @@ interface ProjectProps {}
 const Project: React.FC<ProjectProps> = ({}) => {
   const { data, error, loading } = useGetProjectFromUrl();
 
+  if (loading) return <Loader />;
   if (!data?.project) return <div>Could not found post.</div>;
 
   return (
@@ -20,7 +21,6 @@ const Project: React.FC<ProjectProps> = ({}) => {
       </Head>
       <NavBar />
       {error && <Error errorType='500' description='Something went wrong.' />}
-      {loading && <Loader />}
       <Container title={`${data.project.title}`}>
         <h2 className='mb-20 text-2xl font-semibold text-white tracking-wide sm:text-5xl title-font'>
           {data.project.headline}
@@ -41,4 +41,4 @@ const Project: React.FC<ProjectProps> = ({}) => {
   );
 };
 
-export default withApollo({ ssr: true })(Project);
+export default withApollo({ ssr: false })(Project);

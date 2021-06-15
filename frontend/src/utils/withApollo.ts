@@ -9,10 +9,11 @@ import {
   PaginatedSkills,
 } from '../generated/graphql';
 import { NextPageContext } from 'next';
+import { hostIdentifier } from '.';
 
 const client = (ctx: NextPageContext) =>
   new ApolloClient({
-    uri: 'http://localhost:4000/graphql',
+    uri: hostIdentifier,
     credentials: 'include',
     headers: {
       cookie:

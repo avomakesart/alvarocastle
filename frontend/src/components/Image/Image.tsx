@@ -7,5 +7,5 @@ interface ImageProps {
 }
 
 export const Image: React.FC<ImageProps> = ({ src, alt, width }) => {
-  return <img src={src} alt={alt} className={`max-w-full w-${width}`} />;
+  return <img src={src} alt={alt} className={`max-w-full w-${width} w-16`} />;
 };

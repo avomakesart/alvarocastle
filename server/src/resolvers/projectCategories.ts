@@ -3,13 +3,11 @@ import {
   Arg,
   Ctx,
   Field,
-  //   FieldResolver,
   Int,
   Mutation,
   ObjectType,
   Query,
   Resolver,
-  //   Root,
   UseMiddleware,
 } from 'type-graphql';
 import { getConnection } from 'typeorm';

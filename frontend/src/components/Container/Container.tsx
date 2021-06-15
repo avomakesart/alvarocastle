@@ -13,10 +13,10 @@ export const Container: React.FC<ContainerProps> = ({
 }) => {
   return (
     <div
-      className='container  w-full p-20 m-4 mx-auto mt-16 text-center bg-transparent h-auto'
+      className='container w-full max-w-full pl-4 pr-4 md:p-20 m-4 mx-auto mt-16 text-center bg-transparent h-auto'
       style={style}
     >
-      <h1 className='text-7xl text-white font-extralight tracking-wide'>
+      <h1 className='text-4xl md:text-7xl text-white font-extralight tracking-wide'>
         {title}
       </h1>
       <div className='mt-20'>{children}</div>

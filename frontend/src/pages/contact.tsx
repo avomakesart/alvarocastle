@@ -1,52 +1,23 @@
 import 'animate.css';
+import emailjs, { init } from 'emailjs-com';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { toast } from 'react-toastify';
 import { ArrowMedium } from '../assets/icons/ArrowMedium';
 import { Container, Head, NavBar, SimpleInput } from '../components';
 import { useCreateContactMutation } from '../generated/graphql';
+import { contactSchema } from '../helpers/validationSchemas';
 import { useHover } from '../hooks';
-import { withApollo } from '../utils';
-import emailjs, { init } from 'emailjs-com';
-import { toast } from 'react-toastify';
-import * as Yup from 'yup';
+import { playAudio, withApollo } from '../utils';
 
 init('user_oyZbnUPFuBoCCXcacNsMz');
-interface ContactProps {}
 
-const Contact: React.FC<ContactProps> = ({}) => {
+const Contact = () => {
   const [hoverRef, isHovered] = useHover() as any;
   const [createContact] = useCreateContactMutation();
 
   const router = useRouter();
-
-  const phoneRegExp =
-    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-
-  console.log(phoneRegExp.test('33315826878'));
-
-  const contactSchema = Yup.object().shape({
-    fullname: Yup.string()
-      .min(4, 'The min lenght for the full name is 4 characters!')
-      .max(200, 'Wow you full is too long!')
-      .required('This field required'),
-    subject: Yup.string()
-      .min(4, 'The min lenght for the subject is 4 characters!')
-      .max(50, 'The subject message is too long!')
-      .required('This field is required'),
-    phone: Yup.string()
-      .matches(phoneRegExp, 'Phone number is not valid!')
-      .required('This field is required'),
-    message: Yup.string()
-      .min(10, 'The min lenght for the message is 10 characters!')
-      .max(1000, 'The message is too long!')
-      .required('This field is required'),
-  });
-
-  const playAudio = () => {
-   let emailAudio = new Audio("/email-sent.mp3")
-   emailAudio.play();
-  }
 
   return (
     <>
@@ -64,7 +35,6 @@ const Contact: React.FC<ContactProps> = ({}) => {
         }}
         validationSchema={contactSchema}
         onSubmit={async (values) => {
-          console.log(values);
           const { errors } = await createContact({
             variables: { input: values },
           });
@@ -86,8 +56,7 @@ const Contact: React.FC<ContactProps> = ({}) => {
               }
             );
 
-          if (!errors)
-          playAudio()
+          if (!errors) playAudio('/email-sent.mp3');
           toast.success('🙌 Your message has been sent successfully!', {
             position: 'top-right',
             autoClose: 3000,
@@ -96,9 +65,9 @@ const Contact: React.FC<ContactProps> = ({}) => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-          })
+          });
           setTimeout(() => {
-            router.reload()
+            router.reload();
           }, 3000);
         }}
       >
@@ -153,7 +122,7 @@ const Contact: React.FC<ContactProps> = ({}) => {
                 <div className='flex'>
                   <button
                     ref={hoverRef}
-                    type="submit"
+                    type='submit'
                     id=''
                     className='border-none text-5xl text-white tracking-tight text-left justify-start mt-2'
                   >

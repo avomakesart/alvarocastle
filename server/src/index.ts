@@ -34,6 +34,8 @@ import {
 import { createUpdootLoader } from './utils/createUpdootLoader';
 import { createUserLoader } from './utils/createUserLoader';
 import { createCategoryLoader } from './utils/createCategoryLoader';
+// import { hostIdentifier } from './utils/hostIdentifier';
+// import { dynamicCors } from './utils/dynamicCors';
 
 const main = async () => {
   const conn = await createConnection({
@@ -41,6 +43,10 @@ const main = async () => {
     url: process.env.DATABASE_URL,
     logging: true,
     synchronize: true,
+    // ssl: {
+    //   requestCert: true,
+    //   rejectUnauthorized: false,
+    // },
     migrations: [path.join(__dirname, './migrations/*')],
     entities: [
       Categories,
@@ -62,10 +68,10 @@ const main = async () => {
   const RedisStore = connectRedis(session);
   const redis = new Redis(process.env.REDIS_URL);
 
-  app.set('proxy', 1);
+  app.set("trust proxy", 1);
   app.use(
     cors({
-      origin: 'http://localhost:3000',
+      origin: process.env.CORS_ORIGIN,
       credentials: true,
     })
   );

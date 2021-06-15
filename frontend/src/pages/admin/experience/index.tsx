@@ -100,4 +100,4 @@ const Experience = () => {
   );
 };
 
-export default withApollo({ ssr: true })(Experience);
+export default withApollo({ ssr: false })(Experience);

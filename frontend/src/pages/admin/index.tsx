@@ -12,4 +12,4 @@ const HomeAdmin = () => {
   );
 };
 
-export default withApollo({ ssr: true})(HomeAdmin);
+export default withApollo({ ssr: false})(HomeAdmin);

@@ -1,21 +1,19 @@
-import { Skills } from '../entities';
-import { isAuth } from '../middleware/isAuth';
-import { MyContext } from '../types';
 import {
   Arg,
   Ctx,
   Field,
-  //   FieldResolver,
   InputType,
   Int,
   Mutation,
   ObjectType,
   Query,
   Resolver,
-  //   Root,
   UseMiddleware,
 } from 'type-graphql';
 import { getConnection } from 'typeorm';
+import { Skills } from '../entities';
+import { isAuth } from '../middleware/isAuth';
+import { MyContext } from '../types';
 
 @InputType()
 class SkillInput {

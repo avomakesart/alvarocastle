@@ -1,5 +1,4 @@
 import argon2 from 'argon2';
-import { isAuth } from '../middleware/isAuth';
 import {
   Arg,
   Ctx,
@@ -18,6 +17,7 @@ import { getConnection } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 import { COOKIE_NAME, FORGET_PASSWORD_PREFIX } from '../constants';
 import { Users } from '../entities';
+import { isAuth } from '../middleware/isAuth';
 import { MyContext } from '../types';
 import { sendEmail } from '../utils/sendEmail';
 import { validateRegister } from '../utils/validateRegister';

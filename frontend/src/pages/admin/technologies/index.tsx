@@ -34,4 +34,4 @@ const Technologies = () => {
   );
 };
 
-export default withApollo({ ssr: true })(Technologies);
+export default withApollo({ ssr: false })(Technologies);

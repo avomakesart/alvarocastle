@@ -137,4 +137,4 @@ const CreateCertificate = () => {
   );
 };
 
-export default withApollo({ ssr: true })(CreateCertificate);
+export default withApollo({ ssr: false })(CreateCertificate);

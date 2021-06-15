@@ -81,4 +81,4 @@ const Projects = () => {
   );
 };
 
-export default withApollo({ ssr: true })(Projects);
+export default withApollo({ ssr: false })(Projects);

@@ -153,4 +153,4 @@ const UpdateCertificate: React.FC<UpdateCertificateProps> = () => {
   );
 };
 
-export default withApollo({ ssr: true })(UpdateCertificate);
+export default withApollo({ ssr: false })(UpdateCertificate);

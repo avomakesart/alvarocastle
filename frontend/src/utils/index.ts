@@ -5,3 +5,5 @@ export * from './reactMdUtils';
 export * from './dashRemover';
 export * from './firstCharToUppercase';
 export * from './dateConverter';
+export * from './hostIdentifier';
+export * from './playAudio';

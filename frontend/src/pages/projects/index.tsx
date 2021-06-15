@@ -8,12 +8,14 @@ interface ProjectsPageProps {}
 
 const ProjectsPage: React.FC<ProjectsPageProps> = ({}) => {
   const { data, error, loading } = useProjectsQuery({
-    variables: { limit: 15, cursor: '' },
+    variables: { limit: 30, cursor: '' },
     notifyOnNetworkStatusChange: false,
   });
 
   const projects = data?.projects.projects;
   const [categories] = useState<string[] | string>('all');
+
+ if (loading) return <Loader />
 
   return (
     <>
@@ -36,4 +38,4 @@ const ProjectsPage: React.FC<ProjectsPageProps> = ({}) => {
   );
 };
 
-export default withApollo({ ssr: true })(ProjectsPage);
+export default withApollo({ ssr: false })(ProjectsPage);

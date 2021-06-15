@@ -182,4 +182,4 @@ const UpdateExperience: React.FC<UpdateExperienceProps> = () => {
   );
 };
 
-export default withApollo({ ssr: true })(UpdateExperience);
+export default withApollo({ ssr: false })(UpdateExperience);

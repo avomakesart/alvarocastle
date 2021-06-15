@@ -19,7 +19,7 @@ export const Skills: React.FC<SkillsProps> = ({}) => {
               <p>{error?.message}</p>
             </div>
           )}
-          <div className='animate__animated animate__fadeIn w-full mt-6 text-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
+          <div className='animate__animated animate__fadeIn w-full mt-6 text-center grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4'>
             {data?.skills.skills
               .filter((skill) => skill.category === 'Tech')
               .map((skill) => (
@@ -41,7 +41,7 @@ export const Skills: React.FC<SkillsProps> = ({}) => {
               <p>{error?.message}</p>
             </div>
           )}
-          <div className='animate__animated animate__fadeIn w-full mt-6 text-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
+          <div className='animate__animated animate__fadeIn w-full mt-6 text-center grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4'>
             {data?.skills.skills
               .filter((skill) => skill.category === 'Styles')
               .map((skill) => (
@@ -63,7 +63,7 @@ export const Skills: React.FC<SkillsProps> = ({}) => {
               <p>{error?.message}</p>
             </div>
           )}
-          <div className='animate__animated animate__fadeIn w-full mt-6 text-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
+          <div className='animate__animated animate__fadeIn w-full mt-6 text-center grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4'>
             {data?.skills.skills
               .filter((skill) => skill.category === 'Databases')
               .map((skill) => (
@@ -85,7 +85,7 @@ export const Skills: React.FC<SkillsProps> = ({}) => {
               <p>{error?.message}</p>
             </div>
           )}
-          <div className='animate__animated animate__fadeIn w-full mt-6 text-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
+          <div className='animate__animated animate__fadeIn w-full mt-6 text-center grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4'>
             {data?.skills.skills
               .filter((skill) => skill.category === 'Tools')
               .map((skill) => (
@@ -107,7 +107,7 @@ export const Skills: React.FC<SkillsProps> = ({}) => {
               <p>{error?.message}</p>
             </div>
           )}
-          <div className='animate__animated animate__fadeIn w-full mt-6 text-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
+          <div className='animate__animated animate__fadeIn w-full mt-6 text-center grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4'>
             {data?.skills.skills
               .filter((skill) => skill.category === 'UX')
               .map((skill) => (

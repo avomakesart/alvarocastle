@@ -159,4 +159,4 @@ const CreateExperience = () => {
     </SideBarLayout>
   );
 };
-export default withApollo({ ssr: true })(CreateExperience);
+export default withApollo({ ssr: false })(CreateExperience);
