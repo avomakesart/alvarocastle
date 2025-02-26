@@ -12,6 +12,7 @@ import {
 } from '../components';
 import { useProjectsQuery } from '../generated/graphql';
 import { withApollo } from '../utils';
+import { WorkInProgress } from '../components/WorkInProgress';
 
 interface WorkProps {}
 
@@ -69,8 +70,8 @@ const Work: React.FC<WorkProps> = ({}) => {
         title='Explore'
         style={{ padding: 24, maxWidth: '100%', marginTop: '6.5rem' }}
       >
-        {loading && <Loader />}
-        {error && <Error errorType='500' description={error.message} />}
+        {/* {loading && <Loader />}
+        {error && <Error errorType='500' description={error.message} />} */}
 
         {/* <FilterButtons
           data={showCategories}
@@ -78,16 +79,16 @@ const Work: React.FC<WorkProps> = ({}) => {
           currentData={categories}
         />
         <Projects projects={projects} categories={categories} /> */}
-        <h3 className='text-3xl text-center'>Coming soon</h3>
+         <WorkInProgress title="Projects" />
 
-        <div className='flex justify-center mx-auto'>
+        {/* <div className='flex justify-center mx-auto'>
           <button
             onClick={() => router.push('/projects')}
             className='bg-transparent border-2 border-white text-white p-4 m-8 mx-auto rounded shadow-lg focus:outline-none hover:bg-white hover:text-black'
           >
             See More
           </button>
-        </div>
+        </div> */}
 
         <Repositories repoData={sortedRepos} />
       </Container>
