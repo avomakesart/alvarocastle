@@ -30,19 +30,20 @@ const About = ({}) => {
             className="max-full w-72"
           />
           <div className="flex flex-col items-start gap-4">
-          <p className="animate__animated animate__fadeIn max-w-xl mt-10 md:mt-0 md:ml-16 text-2xl text-justify">
-            I am a product focused Software Engineer based in Utrecth,
-            Netherlands. I create web apps and cool software, focused on the
-            best design patterns and creating stories visually, through
-            enjoyable and meaningful experiences.
-          </p>
+            <p className="animate__animated animate__fadeIn max-w-xl mt-10 md:mt-0 md:ml-16 text-2xl text-justify">
+              I am a product focused Software Engineer based in Utrecth,
+              Netherlands. I create web apps and cool software, focused on the
+              best design patterns and creating stories visually, through
+              enjoyable and meaningful experiences.
+            </p>
 
-          <p className="animate__animated animate__fadeIn max-w-xl mt-10 md:mt-0 md:ml-16 text-2xl text-justify">
-                My approach combines technical excellence with a deep understanding of user needs. I believe that the
-                best products are those that seamlessly blend functionality with elegant design, creating experiences
-                that users love.
-              </p>
-              </div>
+            <p className="animate__animated animate__fadeIn max-w-xl mt-10 md:mt-0 md:ml-16 text-2xl text-justify">
+              My approach combines technical excellence with a deep
+              understanding of user needs. I believe that the best products are
+              those that seamlessly blend functionality with elegant design,
+              creating experiences that users love.
+            </p>
+          </div>
         </div>
 
         <div className="mt-52">

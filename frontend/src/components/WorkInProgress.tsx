@@ -14,7 +14,7 @@ export function WorkInProgress({ title }: WorkInProgressProps) {
           <h3 className="text-xl text-left font-semibold tracking-tight">
             {title}
           </h3>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-left">
             This section is currently being updated as part of my new website
             design.
           </p>
