@@ -72,12 +72,13 @@ const Work: React.FC<WorkProps> = ({}) => {
         {loading && <Loader />}
         {error && <Error errorType='500' description={error.message} />}
 
-        <FilterButtons
+        {/* <FilterButtons
           data={showCategories}
           setState={setCategories}
           currentData={categories}
         />
-        <Projects projects={projects} categories={categories} />
+        <Projects projects={projects} categories={categories} /> */}
+        <h3 className='text-3xl text-center'>Coming soon</h3>
 
         <div className='flex justify-center mx-auto'>
           <button
