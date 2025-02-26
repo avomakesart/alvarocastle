@@ -8,7 +8,7 @@ interface TabsProps {
 const Tabs: React.FC<TabsProps> = ({ children, color, vertical }) => {
   const initialTab = children[0].props.label
   const [activeTab, setActiveTab] = useState(initialTab)
-  const handleActiveTab = useCallback(label => setActiveTab(label), [])
+  const handleActiveTab = useCallback((label: any) => setActiveTab(label), [])
 
   const tabs = (
     <ul

@@ -9,7 +9,7 @@ export * from './Grid/Grid';
 export * from './Head/Head';
 export * from './Hero/Hero';
 export * from './Image/Image';
-export * from './Input/DateInput';
+// export * from './Input/DateInput';
 export * from './Input/Input';
 export * from './Input'
 export * from './Link/Link';

@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import {
   Button,
   CardForm,
-  DateInput,
+  // DateInput,
   Error,
   Input,
   Loader,
@@ -135,7 +135,7 @@ const UpdateExperience: React.FC<UpdateExperienceProps> = () => {
                 </span>
               </div>
 
-              <div className='relative flex flex-col py-4'>
+              {/* <div className='relative flex flex-col py-4'>
                 <DateInput
                   label='Select a new period:'
                   htmlFor='period'
@@ -150,7 +150,7 @@ const UpdateExperience: React.FC<UpdateExperienceProps> = () => {
                   value={dateRange}
                   isClearable={true}
                 />
-              </div>
+              </div> */}
 
               <div className='relative flex flex-col py-4'>
                 <Input

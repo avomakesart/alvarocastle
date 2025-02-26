@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import {
   Button,
   CardForm,
-  DateInput,
+  // DateInput,
   Input,
   SideBarLayout,
 } from '../../../../components';
@@ -81,8 +81,7 @@ const CreateCertificate = () => {
                 />
               </div>
               <div className='relative flex flex-col my-6'>
-                {console.log(certDate)}
-                <DateInput
+                {/* <DateInput
                   label='Certificate Date:'
                   htmlFor='Date'
                   id='date'
@@ -91,7 +90,7 @@ const CreateCertificate = () => {
                   onChange={(e: any) => setCertDate(e)}
                   selected={certDate}
                   name='date'
-                />
+                /> */}
                 <input
                   value={(values.date = certDate)}
                   onChange={handleChange}

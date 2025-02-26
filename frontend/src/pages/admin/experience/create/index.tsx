@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import {
   Button,
   CardForm,
-  DateInput,
+  // DateInput,
   Input,
   SideBarLayout,
 } from '../../../../components';
@@ -112,7 +112,7 @@ const CreateExperience = () => {
                   labelStyle={{ display: 'none' }}
                 />
               </div>
-
+{/* 
               <div className='relative flex flex-col py-4'>
                 <DateInput
                   label='Period:'
@@ -129,7 +129,7 @@ const CreateExperience = () => {
                   withPortal
                   isClearable={true}
                 />
-              </div>
+              </div> */}
 
               <div className='relative flex flex-col py-4'>
                 <Input
