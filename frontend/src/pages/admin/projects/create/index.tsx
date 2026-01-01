@@ -1,5 +1,6 @@
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 import {
   Button,
@@ -17,7 +18,8 @@ import {
 } from '../../../../generated/graphql';
 import { useIsAuth } from '../../../../hooks';
 import { withApollo } from '../../../../utils';
-import JoditEditor from 'jodit-react';
+
+const JoditEditor = dynamic(() => import('jodit-react'), { ssr: false });
 
 
 const CreateProject = ({}) => {
