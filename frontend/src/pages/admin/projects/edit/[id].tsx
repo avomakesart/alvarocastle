@@ -1,5 +1,4 @@
 import { Form, Formik } from 'formik';
-import 'jodit/build/jodit.min.css';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import {
@@ -12,6 +11,7 @@ import {
   SideBarLayout,
 } from '../../../../components';
 import {
+  ProjectCategories,
   useProjectCategoriesQuery,
   useUpdateProjectMutation,
 } from '../../../../generated/graphql';
@@ -21,14 +21,10 @@ import {
   useIsAuth,
 } from '../../../../hooks';
 import { withApollo } from '../../../../utils';
+import JoditEditor from 'jodit-react';
 
-const JoditReact = React.lazy(() => {
-  return import('jodit-react-ts');
-});
 
-interface UpdateProjectProps {}
-
-const UpdateProject: React.FC<UpdateProjectProps> = ({}) => {
+const UpdateProject = ({}) => {
   const isSSR = typeof window === 'undefined';
   const { data, error, loading } = useGetProjectFromUrl();
   const description = loading ? 'loading' : data?.project?.description;
@@ -51,7 +47,7 @@ const UpdateProject: React.FC<UpdateProjectProps> = ({}) => {
 
   const projectCategories =
     categoryData?.projectCategories.projectCategories.map(
-      (data: any) => data.title
+      (data: ProjectCategories) => data.title
     );
 
   if (!data?.project) return <div>Could not found project.</div>;
@@ -71,7 +67,7 @@ const UpdateProject: React.FC<UpdateProjectProps> = ({}) => {
         }}
         onSubmit={async (values) => {
           await updateProject({
-            variables: { id: intId, input: { ...values } } as any,
+            variables: { id: intId, input: { ...values } },
           });
           router.back();
         }}
@@ -151,9 +147,9 @@ const UpdateProject: React.FC<UpdateProjectProps> = ({}) => {
                 <div>
                   {!isSSR && (
                     <React.Suspense fallback={<div>Loading</div>}>
-                      <JoditReact
+                      <JoditEditor
                         onChange={(content) => setValue(content)}
-                        defaultValue={value}
+                        value={value}
                       />
                     </React.Suspense>
                   )}
@@ -165,7 +161,7 @@ const UpdateProject: React.FC<UpdateProjectProps> = ({}) => {
                   type='text'
                   id='description'
                   placeHolder='Description'
-                  value={(values.description = value as any)}
+                  value={(values.description = value as string)}
                   onChange={handleChange}
                   name='description'
                   style={{ display: 'none' }}

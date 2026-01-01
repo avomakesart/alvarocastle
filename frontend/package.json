@@ -24,7 +24,7 @@
     "graphql": "^15.5.0",
     "graphql-tag": "^2.11.0",
     "hamburger-react": "^2.4.0",
-    "jodit-react-ts": "^0.8.0",
+    "jodit-react": "^5.2.38",
     "lucide-react": "^0.469.0",
     "markdown-to-jsx": "^7.1.2",
     "moment": "^2.29.1",

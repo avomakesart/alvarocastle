@@ -1,6 +1,5 @@
 import { format } from 'date-fns';
 import { Form, Formik } from 'formik';
-import 'jodit/build/jodit.min.css';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import {
@@ -13,16 +12,13 @@ import {
 import { useCreateExperienceMutation } from '../../../../generated/graphql';
 import { useIsAuth } from '../../../../hooks';
 import { withApollo } from '../../../../utils';
-
-const JoditReact = React.lazy(() => {
-  return import('jodit-react-ts');
-});
+import JoditEditor from 'jodit-react'
 
 const CreateExperience = () => {
   const isSSR = typeof window === 'undefined';
   const [value, setValue] = useState('');
   const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, endDate] = dateRange as any;
+  const [startDate, endDate] = dateRange as unknown as [Date, Date];
   const router = useRouter();
   const [createExperience] = useCreateExperienceMutation();
   useIsAuth();
@@ -91,9 +87,9 @@ const CreateExperience = () => {
                 <div>
                   {!isSSR && (
                     <React.Suspense fallback={<div>Loading</div>}>
-                      <JoditReact
+                      <JoditEditor
                         onChange={(content) => setValue(content)}
-                        defaultValue={value}
+                        value={value}
                       />
                     </React.Suspense>
                   )}
@@ -105,7 +101,7 @@ const CreateExperience = () => {
                   type='text'
                   id='description'
                   placeHolder='Description'
-                  value={(values.description = value as any)}
+                  value={(values.description = value)}
                   onChange={handleChange}
                   name='description'
                   style={{ display: 'none' }}

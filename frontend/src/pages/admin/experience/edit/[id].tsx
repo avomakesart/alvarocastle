@@ -1,6 +1,5 @@
 import { format } from 'date-fns';
 import { Form, Formik } from 'formik';
-import 'jodit/build/jodit.min.css';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import {
@@ -16,6 +15,7 @@ import { useUpdateExperienceMutation } from '../../../../generated/graphql';
 import { useGetExperienceFromUrl, useIsAuth } from '../../../../hooks';
 import { useGetIntId } from '../../../../hooks/useGetIntId/useGetIntId';
 import { withApollo } from '../../../../utils';
+import JoditEditor from 'jodit-react';
 
 interface UpdateExperienceProps {
   id: number;
@@ -25,16 +25,13 @@ interface UpdateExperienceProps {
   description: string;
 }
 
-const JoditReact = React.lazy(() => {
-  return import('jodit-react-ts');
-});
 
 const UpdateExperience: React.FC<UpdateExperienceProps> = () => {
   const isSSR = typeof window === 'undefined';
   const { data, error, loading } = useGetExperienceFromUrl();
   const [value, setValue] = React.useState(data?.experience?.description);
   const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, endDate] = dateRange as any;
+  const [startDate, endDate] = dateRange as unknown as [Date, Date];
   const [updateExperience] = useUpdateExperienceMutation();
   const intId = useGetIntId();
   const router = useRouter();
@@ -49,7 +46,7 @@ const UpdateExperience: React.FC<UpdateExperienceProps> = () => {
 
   return (
     <SideBarLayout sectionTitle={data.experience.company}>
-      {error && <Error errorType='500' description='Something went wrong' />}
+      {error && <Error errorType="500" description="Something went wrong" />}
       {loading && <Loader />}
       <Formik
         initialValues={{
@@ -62,7 +59,7 @@ const UpdateExperience: React.FC<UpdateExperienceProps> = () => {
           console.log(values);
 
           await updateExperience({
-            variables: { id: intId, input: { ...values } } as any,
+            variables: { id: intId, input: { ...values } },
           });
           router.back();
         }}
@@ -70,67 +67,67 @@ const UpdateExperience: React.FC<UpdateExperienceProps> = () => {
         {({ values, handleChange }) => (
           <CardForm>
             <Form>
-              <div className='relative flex flex-col mb-6'>
+              <div className="relative flex flex-col mb-6">
                 <Input
-                  label='Company name:'
-                  htmlFor='company'
-                  type='text'
-                  id='company'
-                  placeHolder=''
+                  label="Company name:"
+                  htmlFor="company"
+                  type="text"
+                  id="company"
+                  placeHolder=""
                   value={values.company}
                   onChange={handleChange}
-                  name='company'
+                  name="company"
                 />
               </div>
-              <div className='relative flex flex-col my-6'>
+              <div className="relative flex flex-col my-6">
                 <Input
-                  label='Position'
-                  htmlFor='position'
-                  type='text'
-                  id='position'
-                  placeHolder=''
+                  label="Position"
+                  htmlFor="position"
+                  type="text"
+                  id="position"
+                  placeHolder=""
                   value={values.position}
                   onChange={handleChange}
-                  name='position'
+                  name="position"
                 />
               </div>
-              <div className='relative flex flex-col py-4'>
+              <div className="relative flex flex-col py-4">
                 <label
-                  htmlFor='description'
-                  className='block text-sm font-medium text-gray-700'
+                  htmlFor="description"
+                  className="block text-sm font-medium text-gray-700"
                 >
                   Description
                 </label>
                 <div>
                   {!isSSR && (
                     <React.Suspense fallback={<div>Loading</div>}>
-                      <JoditReact
+                      <JoditEditor
                         onChange={(content) => setValue(content)}
-                        defaultValue={value}
+                        value={value}
                       />
                     </React.Suspense>
                   )}
                 </div>
 
                 <Input
-                  label='Description'
-                  htmlFor='Description'
-                  type='text'
-                  id='description'
-                  placeHolder='Description'
-                  value={(values.description = value as any)}
+                  label="Description"
+                  htmlFor="Description"
+                  type="text"
+                  id="description"
+                  placeHolder="Description"
+                  value={(values.description = value as string)}
                   onChange={handleChange}
-                  name='description'
-                  style={{ display: 'none' }}
-                  labelStyle={{ display: 'none' }}
+                  name="description"
+                  style={{ display: "none" }}
+                  labelStyle={{ display: "none" }}
                 />
               </div>
 
-              <div className='flex flex-col'>
-                <span className='block text-sm font-medium text-gray-700'>
+              <div className="flex flex-col">
+                <span className="block text-sm font-medium text-gray-700">
                   Current period:
                 </span>
-                <span className='block text-sm font-medium text-gray-700'>
+                <span className="block text-sm font-medium text-gray-700">
                   {data.experience?.period}
                 </span>
               </div>
@@ -152,27 +149,27 @@ const UpdateExperience: React.FC<UpdateExperienceProps> = () => {
                 />
               </div> */}
 
-              <div className='relative flex flex-col py-4'>
+              <div className="relative flex flex-col py-4">
                 <Input
-                  label='Period selected'
-                  htmlFor='Date Selected'
-                  type='text'
-                  id='date'
+                  label="Period selected"
+                  htmlFor="Date Selected"
+                  type="text"
+                  id="date"
                   placeHolder={values.period}
                   value={(values.period = newDateRange)}
                   onChange={handleChange}
-                  name='period'
-                  style={{ display: 'none' }}
-                  labelStyle={{ display: 'none' }}
+                  name="period"
+                  style={{ display: "none" }}
+                  labelStyle={{ display: "none" }}
                 />
               </div>
 
               <Button
-                textColor='white'
+                textColor="white"
                 hasBorder
-                borderColor='white'
-                backgroundColor='black'
-                text='Update Experience'
+                borderColor="white"
+                backgroundColor="black"
+                text="Update Experience"
               />
             </Form>
           </CardForm>

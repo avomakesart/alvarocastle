@@ -1,5 +1,4 @@
 import { Form, Formik } from 'formik';
-import 'jodit/build/jodit.min.css';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import {
@@ -12,23 +11,20 @@ import {
   SideBarLayout,
 } from '../../../../components';
 import {
+  ProjectCategories,
   useCreateProjectMutation,
   useProjectCategoriesQuery,
 } from '../../../../generated/graphql';
 import { useIsAuth } from '../../../../hooks';
 import { withApollo } from '../../../../utils';
+import JoditEditor from 'jodit-react';
 
-const JoditReact = React.lazy(() => {
-  return import('jodit-react-ts');
-});
 
-interface CreateProjectProps {}
-
-const CreateProject: React.FC<CreateProjectProps> = ({}) => {
-  const isSSR = typeof window === 'undefined';
-  const [value, setValue] = useState('');
+const CreateProject = ({}) => {
+  const isSSR = typeof window === "undefined";
+  const [value, setValue] = useState("");
   const { data, error, loading } = useProjectCategoriesQuery({
-    variables: { limit: 10, cursor: '' },
+    variables: { limit: 10, cursor: "" },
     notifyOnNetworkStatusChange: true,
   });
   const [createProject] = useCreateProjectMutation();
@@ -36,136 +32,136 @@ const CreateProject: React.FC<CreateProjectProps> = ({}) => {
   useIsAuth();
 
   const projectCategories = data?.projectCategories.projectCategories.map(
-    (category: any) => category.title
+    (category: ProjectCategories) => category.title
   );
 
   return (
-    <SideBarLayout sectionTitle='Create Project'>
-      {error && <Error errorType='500' description='Something went wrong' />}
+    <SideBarLayout sectionTitle="Create Project">
+      {error && <Error errorType="500" description="Something went wrong" />}
       {loading && <Loader />}
       <Formik
         initialValues={{
-          title: '',
-          headline: '',
-          headlineImage: '',
-          description: '',
-          featuredImage: '',
-          category: '',
+          title: "",
+          headline: "",
+          headlineImage: "",
+          description: "",
+          featuredImage: "",
+          category: "",
         }}
         onSubmit={async (values) => {
           console.log(values);
           const { errors } = await createProject({
             variables: { input: values },
             update: (cache) => {
-              cache.evict({ fieldName: 'projects:{}' });
+              cache.evict({ fieldName: "projects:{}" });
             },
           });
-          if (!errors) router.push('/');
+          if (!errors) router.push("/");
         }}
       >
         {({ values, handleChange }) => (
           <CardForm>
             <Form>
-              <div className='relative flex flex-col pb-4'>
+              <div className="relative flex flex-col pb-4">
                 <Input
-                  label='Project name'
-                  htmlFor='Category'
-                  type='text'
-                  id='title'
-                  placeHolder='Project title'
+                  label="Project name"
+                  htmlFor="Category"
+                  type="text"
+                  id="title"
+                  placeHolder="Project title"
                   value={values.title}
                   onChange={handleChange}
-                  name='title'
+                  name="title"
                 />
               </div>
 
-              <div className='relative flex flex-col py-4'>
+              <div className="relative flex flex-col py-4">
                 <Input
-                  label='Project headline'
-                  htmlFor='Headline'
-                  type='text'
-                  id='headline'
-                  placeHolder='Project headline'
+                  label="Project headline"
+                  htmlFor="Headline"
+                  type="text"
+                  id="headline"
+                  placeHolder="Project headline"
                   value={values.headline}
                   onChange={handleChange}
-                  name='headline'
+                  name="headline"
                 />
               </div>
 
-              <div className='relative flex flex-col py-4'>
+              <div className="relative flex flex-col py-4">
                 <Input
-                  label='Project featured image'
-                  htmlFor='Featured image'
-                  type='text'
-                  id='featuredImage'
-                  placeHolder='Image url'
+                  label="Project featured image"
+                  htmlFor="Featured image"
+                  type="text"
+                  id="featuredImage"
+                  placeHolder="Image url"
                   value={values.featuredImage}
                   onChange={handleChange}
-                  name='featuredImage'
+                  name="featuredImage"
                 />
               </div>
 
-              <div className='relative flex flex-col py-4'>
+              <div className="relative flex flex-col py-4">
                 <Input
-                  label='Project Headline image'
-                  htmlFor='headlineImage'
-                  type='text'
-                  id='headlineImage'
-                  placeHolder='Image url'
+                  label="Project Headline image"
+                  htmlFor="headlineImage"
+                  type="text"
+                  id="headlineImage"
+                  placeHolder="Image url"
                   value={values.headlineImage}
                   onChange={handleChange}
-                  name='featuredImage'
+                  name="featuredImage"
                 />
               </div>
 
-              <div className='relative flex flex-col py-4'>
+              <div className="relative flex flex-col py-4">
                 <SelectInput
-                  label='Select a category'
-                  defaultValue='Show Categories'
+                  label="Select a category"
+                  defaultValue="Show Categories"
                   handleChange={handleChange}
                   data={projectCategories}
                   selectedValue={values.category}
                 />
               </div>
 
-              <div className='relative flex flex-col py-4'>
+              <div className="relative flex flex-col py-4">
                 <label
-                  htmlFor='description'
-                  className='block text-sm font-medium text-gray-700'
+                  htmlFor="description"
+                  className="block text-sm font-medium text-gray-700"
                 >
                   Description
                 </label>
                 <div>
                   {!isSSR && (
                     <React.Suspense fallback={<div>Loading</div>}>
-                      <JoditReact
+                      <JoditEditor
                         onChange={(content) => setValue(content)}
-                        defaultValue={value}
+                        value={value}
                       />
                     </React.Suspense>
                   )}
                 </div>
 
                 <Input
-                  label='Description'
-                  htmlFor='Description'
-                  type='text'
-                  id='description'
-                  placeHolder='Description'
-                  value={(values.description = value as any)}
+                  label="Description"
+                  htmlFor="Description"
+                  type="text"
+                  id="description"
+                  placeHolder="Description"
+                  value={(values.description = value)}
                   onChange={handleChange}
-                  name='description'
-                  style={{ display: 'none' }}
-                  labelStyle={{ display: 'none' }}
+                  name="description"
+                  style={{ display: "none" }}
+                  labelStyle={{ display: "none" }}
                 />
               </div>
 
               <Button
-                textColor='white'
+                textColor="white"
                 hasBorder={true}
-                borderColor='white'
-                backgroundColor='black'
-                text='Create Project'
+                borderColor="white"
+                backgroundColor="black"
+                text="Create Project"
               />
             </Form>
           </CardForm>
