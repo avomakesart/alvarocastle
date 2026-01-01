@@ -13,7 +13,7 @@ export const AdminNavBar: React.FC<NavBarProps> = () => {
   const [logout] = useLogoutMutation();
   const [isProfileOpen, setIsProfileOpen] = useState<boolean>(false);
   const [isSideBarOpen, setIsSideBarOpen] = useState<boolean>(false);
-  const sidebarRef = useRef() as any;
+  const sidebarRef = useRef(undefined) as any;
   const router = useRouter();
 
   useOnClickOutside(sidebarRef, () => setIsSideBarOpen(false));

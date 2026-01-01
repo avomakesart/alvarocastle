@@ -17,7 +17,7 @@
     "resolveJsonModule": true,
     "experimentalDecorators": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true
   },
   "include": [
